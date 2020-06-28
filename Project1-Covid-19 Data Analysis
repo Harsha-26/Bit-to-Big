@@ -1,0 +1,164 @@
+Jupyter Notebook
+Project1-Covid-19 Italy Data Analysis
+Last Checkpoint: 2 minutes ago
+(autosaved)
+Current Kernel Logo
+Python 3 
+File
+Edit
+View
+Insert
+Cell
+Kernel
+Widgets
+Help
+
+Code
+Data Science Project 1:Covid-19 Data Analysis-Italy
+Aim: To draw Insights from Covid-19 Data from data visualization method
+es
+#importing all the dependencies
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+ion path into data variable
+#reading the particular csv file by providing the file location path into data variable
+data=pd.read_csv(r"C:\Users\Varun\DataScience_Practice\Covid-19.csv")
+visualize the dataset
+data #visualize the dataset
+SNo	Date	Country	RegionCode	RegionName	Latitude	Longitude	HospitalizedPatients	IntensiveCarePatients	TotalHospitalizedPatients	HomeConfinement	CurrentPositiveCases	NewPositiveCases	Recovered	Deaths	TotalPositiveCases	TestsPerformed
+0	0	2020-02-24T18:00:00	ITA	13	Abruzzo	42.351222	13.398438	0	0	0	0	0	0	0	0	0	NaN
+1	1	2020-02-24T18:00:00	ITA	17	Basilicata	40.639471	15.805148	0	0	0	0	0	0	0	0	0	NaN
+2	2	2020-02-24T18:00:00	ITA	21	P.A. Bolzano	46.499335	11.356624	0	0	0	0	0	0	0	0	0	NaN
+3	3	2020-02-24T18:00:00	ITA	18	Calabria	38.905976	16.594402	0	0	0	0	0	0	0	0	0	NaN
+4	4	2020-02-24T18:00:00	ITA	15	Campania	40.839566	14.250850	0	0	0	0	0	0	0	0	0	NaN
+...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...
+2494	2494	2020-06-21T17:00:00	ITA	9	Toscana	43.769231	11.255889	19	9	28	337	365	3	8750	1095	10210	217330.0
+2495	2495	2020-06-21T17:00:00	ITA	22	P.A. Trento	46.068935	11.121231	0	0	0	53	53	5	3944	466	4463	58345.0
+2496	2496	2020-06-21T17:00:00	ITA	10	Umbria	43.106758	12.388247	4	1	5	10	15	0	1345	78	1438	61227.0
+2497	2497	2020-06-21T17:00:00	ITA	2	Valle d'Aosta	45.737503	7.320149	4	0	4	1	5	0	1042	146	1193	13294.0
+2498	2498	2020-06-21T17:00:00	ITA	5	Veneto	45.434905	12.338452	28	1	29	554	583	7	16660	2002	19245	388938.0
+2499 rows × 17 columns
+
+#head() is used to return the first n rows of dataset.By default it returns first 5 rows
+data.head() #head() is used to return the first n rows of dataset.By default it returns first 5 rows
+​
+SNo	Date	Country	RegionCode	RegionName	Latitude	Longitude	HospitalizedPatients	IntensiveCarePatients	TotalHospitalizedPatients	HomeConfinement	CurrentPositiveCases	NewPositiveCases	Recovered	Deaths	TotalPositiveCases	TestsPerformed
+0	0	2020-02-24T18:00:00	ITA	13	Abruzzo	42.351222	13.398438	0	0	0	0	0	0	0	0	0	NaN
+1	1	2020-02-24T18:00:00	ITA	17	Basilicata	40.639471	15.805148	0	0	0	0	0	0	0	0	0	NaN
+2	2	2020-02-24T18:00:00	ITA	21	P.A. Bolzano	46.499335	11.356624	0	0	0	0	0	0	0	0	0	NaN
+3	3	2020-02-24T18:00:00	ITA	18	Calabria	38.905976	16.594402	0	0	0	0	0	0	0	0	0	NaN
+4	4	2020-02-24T18:00:00	ITA	15	Campania	40.839566	14.250850	0	0	0	0	0	0	0	0	0	NaN
+data.head(10)#returns the first 10 rows of dataset
+data.head(10)#returns the first 10 rows of dataset
+SNo	Date	Country	RegionCode	RegionName	Latitude	Longitude	HospitalizedPatients	IntensiveCarePatients	TotalHospitalizedPatients	HomeConfinement	CurrentPositiveCases	NewPositiveCases	Recovered	Deaths	TotalPositiveCases	TestsPerformed
+0	0	2020-02-24T18:00:00	ITA	13	Abruzzo	42.351222	13.398438	0	0	0	0	0	0	0	0	0	NaN
+1	1	2020-02-24T18:00:00	ITA	17	Basilicata	40.639471	15.805148	0	0	0	0	0	0	0	0	0	NaN
+2	2	2020-02-24T18:00:00	ITA	21	P.A. Bolzano	46.499335	11.356624	0	0	0	0	0	0	0	0	0	NaN
+3	3	2020-02-24T18:00:00	ITA	18	Calabria	38.905976	16.594402	0	0	0	0	0	0	0	0	0	NaN
+4	4	2020-02-24T18:00:00	ITA	15	Campania	40.839566	14.250850	0	0	0	0	0	0	0	0	0	NaN
+5	5	2020-02-24T18:00:00	ITA	8	Emilia-Romagna	44.494367	11.341721	10	2	12	6	18	18	0	0	18	NaN
+6	6	2020-02-24T18:00:00	ITA	6	Friuli Venezia Giulia	45.649435	13.768136	0	0	0	0	0	0	0	0	0	NaN
+7	7	2020-02-24T18:00:00	ITA	12	Lazio	41.892770	12.483667	1	1	2	0	2	2	1	0	3	NaN
+8	8	2020-02-24T18:00:00	ITA	7	Liguria	44.411493	8.932699	0	0	0	0	0	0	0	0	0	NaN
+9	9	2020-02-24T18:00:00	ITA	3	Lombardia	45.466794	9.190347	76	19	95	71	166	166	0	6	172	NaN
+ #coulmns returns all the fields in dataset
+data.columns #coulmns returns all the fields in dataset
+Index(['SNo', 'Date', 'Country', 'RegionCode', 'RegionName', 'Latitude',
+       'Longitude', 'HospitalizedPatients', 'IntensiveCarePatients',
+       'TotalHospitalizedPatients', 'HomeConfinement', 'CurrentPositiveCases',
+       'NewPositiveCases', 'Recovered', 'Deaths', 'TotalPositiveCases',
+       'TestsPerformed'],
+      dtype='object')
+last
+data.tail() #tail() is used to return the last n rows of dataset.By default it returns last 5 rows
+SNo	Date	Country	RegionCode	RegionName	Latitude	Longitude	HospitalizedPatients	IntensiveCarePatients	TotalHospitalizedPatients	HomeConfinement	CurrentPositiveCases	NewPositiveCases	Recovered	Deaths	TotalPositiveCases	TestsPerformed
+2494	2494	2020-06-21T17:00:00	ITA	9	Toscana	43.769231	11.255889	19	9	28	337	365	3	8750	1095	10210	217330.0
+2495	2495	2020-06-21T17:00:00	ITA	22	P.A. Trento	46.068935	11.121231	0	0	0	53	53	5	3944	466	4463	58345.0
+2496	2496	2020-06-21T17:00:00	ITA	10	Umbria	43.106758	12.388247	4	1	5	10	15	0	1345	78	1438	61227.0
+2497	2497	2020-06-21T17:00:00	ITA	2	Valle d'Aosta	45.737503	7.320149	4	0	4	1	5	0	1042	146	1193	13294.0
+2498	2498	2020-06-21T17:00:00	ITA	5	Veneto	45.434905	12.338452	28	1	29	554	583	7	16660	2002	19245	388938.0
+data.tail(10)#returns the last 10 rows of dataset
+SNo	Date	Country	RegionCode	RegionName	Latitude	Longitude	HospitalizedPatients	IntensiveCarePatients	TotalHospitalizedPatients	HomeConfinement	CurrentPositiveCases	NewPositiveCases	Recovered	Deaths	TotalPositiveCases	TestsPerformed
+2489	2489	2020-06-21T17:00:00	ITA	14	Molise	41.557748	14.659161	2	0	2	38	40	0	378	23	441	19644.0
+2490	2490	2020-06-21T17:00:00	ITA	1	Piemonte	45.073274	7.680687	356	19	375	1638	2013	26	25177	4051	31241	246075.0
+2491	2491	2020-06-21T17:00:00	ITA	16	Puglia	41.125596	16.867367	32	1	33	189	222	2	3765	540	4527	106637.0
+2492	2492	2020-06-21T17:00:00	ITA	20	Sardegna	39.215312	9.110616	9	0	9	19	28	0	1209	132	1369	64324.0
+2493	2493	2020-06-21T17:00:00	ITA	19	Sicilia	38.115697	13.362357	20	6	26	115	141	2	2651	280	3072	158911.0
+2494	2494	2020-06-21T17:00:00	ITA	9	Toscana	43.769231	11.255889	19	9	28	337	365	3	8750	1095	10210	217330.0
+2495	2495	2020-06-21T17:00:00	ITA	22	P.A. Trento	46.068935	11.121231	0	0	0	53	53	5	3944	466	4463	58345.0
+2496	2496	2020-06-21T17:00:00	ITA	10	Umbria	43.106758	12.388247	4	1	5	10	15	0	1345	78	1438	61227.0
+2497	2497	2020-06-21T17:00:00	ITA	2	Valle d'Aosta	45.737503	7.320149	4	0	4	1	5	0	1042	146	1193	13294.0
+2498	2498	2020-06-21T17:00:00	ITA	5	Veneto	45.434905	12.338452	28	1	29	554	583	7	16660	2002	19245	388938.0
+iation,mean,minimum,maximum,25%,50%,75% of the entire data set
+data.describe() #describe is used to return count,standard deviation,mean,minimum,maximum,25%,50%,75% of the entire data set
+SNo	RegionCode	Latitude	Longitude	HospitalizedPatients	IntensiveCarePatients	TotalHospitalizedPatients	HomeConfinement	CurrentPositiveCases	NewPositiveCases	Recovered	Deaths	TotalPositiveCases	TestsPerformed
+count	2499.000000	2499.000000	2499.000000	2499.000000	2499.000000	2499.000000	2499.000000	2499.000000	2499.000000	2499.000000	2499.000000	2499.000000	2499.000000	1344.000000
+mean	1249.000000	11.857143	43.046293	12.225955	643.503401	73.541817	717.045218	2021.358944	2738.404162	95.595438	3489.270108	980.765106	7208.439376	96888.520089
+std	721.543484	6.275054	2.489279	2.659480	1580.741379	166.811873	1741.290027	4127.503237	5593.967928	239.415612	8051.175637	2625.580053	14985.175902	99749.314509
+min	0.000000	1.000000	38.115697	7.320149	0.000000	0.000000	0.000000	0.000000	0.000000	-229.000000	0.000000	0.000000	0.000000	3482.000000
+25%	624.500000	7.000000	41.125596	11.121231	26.000000	2.000000	31.000000	95.000000	139.000000	2.000000	34.500000	24.000000	436.000000	31355.750000
+50%	1249.000000	12.000000	43.616760	12.388247	120.000000	16.000000	139.000000	598.000000	779.000000	15.000000	758.000000	198.000000	2473.000000	58699.500000
+75%	1873.500000	17.000000	45.434905	13.768136	515.500000	68.000000	577.500000	1868.000000	2573.000000	78.000000	2667.500000	573.000000	6199.000000	128813.500000
+max	2498.000000	22.000000	46.499335	16.867367	12077.000000	1381.000000	13328.000000	30382.000000	37307.000000	3251.000000	62555.000000	16570.000000	92968.000000	570750.000000
+#Return the sum of total null values
+data.isnull().sum()#Return the sum of total null values
+SNo                             0
+Date                            0
+Country                         0
+RegionCode                      0
+RegionName                      0
+Latitude                        0
+Longitude                       0
+HospitalizedPatients            0
+IntensiveCarePatients           0
+TotalHospitalizedPatients       0
+HomeConfinement                 0
+CurrentPositiveCases            0
+NewPositiveCases                0
+Recovered                       0
+Deaths                          0
+TotalPositiveCases              0
+TestsPerformed               1155
+dtype: int64
+Note:Inorder to find the null values in a data set we can use the isnull().Dropping of such null values from your data set make your visualization and prediction more accurate.But there is some exceptional cases such as,for example if your data contains 35 records and amongst them if 28 are null values dont go for dropping it because if you drop 28 null values from 35 records you will left only 7 records which is not enough to make visualization and prediction.
+
+We can drop the null values by: data=data.dropna(subset=["Coulmn name"],implace=True)
+
+While using implace=true, the data is modified in place which means it returns nothing and now the dataframe is updated. When implace=false,which is the default operation then the operation is performed and it returns a copy of the object
+
+Stepping into Data Visualization using Scatterplots
+1.Scatterplots are main ways of statistical visualization. 2.Depicts the joint distribution of two variables with the data points where each point represents observation. 3.To evaluate whether there is any meaningful relationship between the variables.
+
+Advantages of Scatterplots: 1.Shows all data points including min,max and outliers. 2.Can highlight correlations. 3.Retains exact data value and sample size.
+
+data.columns
+Index(['SNo', 'Date', 'Country', 'RegionCode', 'RegionName', 'Latitude',
+       'Longitude', 'HospitalizedPatients', 'IntensiveCarePatients',
+       'TotalHospitalizedPatients', 'HomeConfinement', 'CurrentPositiveCases',
+       'NewPositiveCases', 'Recovered', 'Deaths', 'TotalPositiveCases',
+       'TestsPerformed'],
+      dtype='object')
+sns.relplot(x="TotalPositiveCases",y="Recovered",data=data)#relplot is used to check the relationship with scatterplot
+sns.relplot(x="TotalPositiveCases",y="Recovered",data=data)#relplot is used to check the relationship with scatterplot
+<seaborn.axisgrid.FacetGrid at 0x1cdfdd5e668>
+
+Inference from above Visualization:Here total number of positive cases are almost 80000 and recovered rate so far is above 60000.The recovery rate shows a down slope at some point.When there were 40000 positive cases,the recovery rate was below 10000 only which is very less.But as the time passes ,peopel are taking more precautions and preventions by considering the seriousness of the disease and as a part of that recovery rate is increasing time by time.
+
+sns.relplot(x="TotalPositiveCases",y="Recovered",hue="Deaths",data=data)
+<seaborn.axisgrid.FacetGrid at 0x1cdfe08ba90>
+
+The above diagram shows the death number by passing the coulmn "Deaths" in hue parameter.
+
+Using Categorical Scatterplot by using catplot
+catplot is used to handle categorical data.
+
+1.To display the distribution of a category of data. 2.Instead of this we may can use a boxplot or histogram instead.(but preferably for large amount of data points). 3.If u have a small number of data points for one category,for eg:5 to 80 points its better to use categorical scatterplot.
+
+sns.catplot(x="TotalPositiveCases",y="Recovered",data=data)
+<seaborn.axisgrid.FacetGrid at 0x1cdfe026eb8>
+
+Inference:Recovering rate is some what shows a positive nature comparing to previous time.
+
+​
